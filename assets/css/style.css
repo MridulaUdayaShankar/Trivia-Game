@@ -1,6 +1,12 @@
 body {
-  background-image: url("https://topbankcoachingchandigarh.files.wordpress.com/2016/12/f01fd-08ba39fad5b7a3cf01a8e3975f6e9526_geography-geography-clipart_640-324.gif");
+  /* background-image: url("https://topbankcoachingchandigarh.files.wordpress.com/2016/12/f01fd-08ba39fad5b7a3cf01a8e3975f6e9526_geography-geography-clipart_640-324.gif"); */
   background-repeat: no-repeat;
+}
+.show {
+  display: inherit;
+}
+.hide {
+  display: none;
 }
 .col-md-4 {
   font-family: "Roboto Condensed", Sans-Serif;
