@@ -56,20 +56,22 @@ $(document).ready(function() {
   var index = 0;
   var questionIndex = 0;
   var maxQuestions = questionsList.length;
-
+  var score = 0;
   var intervalId;
   var clockRunning = false;
   var time = 0;
+  var twentySecs = 20 * 1;
 
   function reset() {
+    stop();
     time = 0;
+    $("#display").empty();
     $("#display").text("00:00");
   }
 
   function start() {
-    
     if (!clockRunning) {
-      intervalId = setInterval(count(), 10000);
+      intervalId = setInterval(count(), 1000);
       clockRunning = true;
     }
     index++;
@@ -77,11 +79,10 @@ $(document).ready(function() {
   }
 
   function stop() {
-    
     clearInterval(intervalId);
     clockRunning = false;
   }
-  
+
   function count() {
     time++;
     var converted = timeConverter(time);
@@ -106,23 +107,66 @@ $(document).ready(function() {
   }
 
   function renderQuestion(index) {
+    startTimer(twentySecs);
     if (index >= maxQuestions) {
       index = 0;
     }
     var currentQuestion = questionsList[index];
     var qContainer = $("#question");
     qContainer.empty();
-    qContainer.append($("<p>").html(currentQuestion.q));
+    $("#display").empty();
+    qContainer.append(
+      $("<p>")
+        .html(currentQuestion.q)
+        .attr("data", currentQuestion.a)
+    );
 
     currentQuestion.options.forEach(function(o) {
-      $("<div>").html(o).appendTo(qContainer);
+      $("<div>")
+        .html(o)
+        .appendTo(qContainer);
     });
+
+    $("#question div").click(function(e) {
+      console.log($(e.target).text());
+      console.log($("#question p").attr("data"));
+      var clickedOption = $(e.target).text();
+
+      if ($("#question p").attr("data") === clickedOption) {
+        stop();
+        // increment score
+        score++;
+        $("#showResult").text("Correct Answer!");
+        index++;
+        renderQuestion(index);
+      }
+    });
+  }
+
+  function startTimer(duration) {
+    var timer = duration,
+      minutes,
+      seconds;
+
+      intervalId = setInterval(function() {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+      $("#display").text(minutes + ":" + seconds);
+
+      if (--timer <= 0) {
+        timer = duration;
+        index++;
+        renderQuestion(index);
+      }
+    }, 1000);
   }
 
   $("#start").on("click", function() {
     renderQuestion(index);
-    // clockRunning = false;
-    // time = 0;
-    start();
   });
 });

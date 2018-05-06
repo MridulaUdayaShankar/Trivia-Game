@@ -1,27 +1,44 @@
-.container{
+body{
   background-image: url("https://topbankcoachingchandigarh.files.wordpress.com/2016/12/f01fd-08ba39fad5b7a3cf01a8e3975f6e9526_geography-geography-clipart_640-324.gif");
   background-repeat:no-repeat;
   /* background-image: url("https://i.ytimg.com/vi/mFC2X9C6MjY/maxresdefault.jpg"); */
-  
 }
-.row{
+.row {
   padding: 20px;
 }
 .col-md-4 {
   font-family: "Roboto Condensed", Sans-Serif;
   font-size: 35px;
-  
 }
 .col-md-6 {
     font-family: "Cabin", Sans-Serif;
     font-size: 30px;
 }
-.btn{
+.btn {
   padding:20px;
 }
-#display{
-  /* color: antiquewhite;  */
+
+@media (min-width: 576px) { 
+.container{
+  display:block;
 }
-#question{
-  /* color: antiquewhite;  */
 }
+
+
+@media (min-width: 768px) { 
+  .container{
+    display:block;
+  }
+}
+
+@media (min-width: 992px) { 
+  .container{
+    display:block;
+  }
+ }
+
+@media (min-width: 1200px) { 
+  .container{
+    display:block;
+  }
+ }
